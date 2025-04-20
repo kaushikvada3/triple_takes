@@ -11,7 +11,6 @@ public class PropSpawner : MonoBehaviour
         Vector3 spawnxy = Camera.main.transform.position + Camera.main.transform.forward * 3f + Vector3.down * 0.5f;
         GameObject spawn = Instantiate(props[choice], spawnxy, Quaternion.identity);
         spawn.AddComponent<Draggable>();
-       // spawn = spawned; 
     }
 
 

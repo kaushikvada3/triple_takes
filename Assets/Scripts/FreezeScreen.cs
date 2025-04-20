@@ -2,51 +2,63 @@ using UnityEngine;
 
 public class FreezeScreen : MonoBehaviour
 {
-    public KeyCode toggleKey = KeyCode.F; // Key to toggle the freeze screen
+    public KeyCode freezeKey = KeyCode.F; // Key to hold for freezing the screen
     private bool isFrozen = false;
-    private SimpleFPSController fpsController;
-    private GameObject objectToDrag;
     private bool isDragging = false;
-    private Vector3 offset;
-
+    private float dragDistance;
+    private GameObject objectToDrag;
     private Camera mainCamera;
-    private Vector3 originalCameraRotation;
+
+    private SimpleFPSController fpsController;
 
     void Start()
     {
         fpsController = Camera.main.GetComponentInParent<SimpleFPSController>();
-        mainCamera = Camera.main;
-        originalCameraRotation = mainCamera.transform.eulerAngles;
-
         if (fpsController == null)
         {
             Debug.LogWarning("No SimpleFPSController found on Main Camera's parent!");
         }
+
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
-        // When the toggle key is pressed, freeze the screen and start dragging the object
-        if (Input.GetKeyDown(toggleKey) && !isFrozen)
+        // Check if the freeze key is being pressed down
+        if (Input.GetKeyDown(freezeKey))
         {
             isFrozen = true;
             FreezeCharacterMovement();
-            StartDragging();
         }
-
-        // Continue dragging the object if frozen
-        if (isFrozen && isDragging)
+        
+        // Check if the freeze key is released
+        if (Input.GetKeyUp(freezeKey))
         {
-            DragObject();
-        }
-
-        // If the key is released, unfreeze and reset camera
-        if (Input.GetKeyUp(toggleKey) && isFrozen)
-        {
-            StopDragging();
-            UnfreezeCharacterMovement();
-            ChangeCameraPerspective(); // Change the camera perspective on release
             isFrozen = false;
+            UnfreezeCharacterMovement();
+            StopDragging();
+        }
+
+        // Only handle dragging functionality when the screen is frozen
+        if (isFrozen)
+        {
+            // Check for initial mouse click to start dragging
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartDragging();
+            }
+            
+            // Continue dragging while mouse button is held
+            if (isDragging && Input.GetMouseButton(0))
+            {
+                DragObject();
+            }
+            
+            // Stop dragging when mouse button is released
+            if (isDragging && Input.GetMouseButtonUp(0))
+            {
+                StopDragging();
+            }
         }
     }
 
@@ -72,45 +84,38 @@ public class FreezeScreen : MonoBehaviour
         Cursor.visible = false; // Hide the cursor
     }
 
-    // Change the camera's perspective (you can modify this to fit your needs)
-    void ChangeCameraPerspective()
-    {
-        // For example, let's modify the camera's rotation
-        mainCamera.transform.eulerAngles = new Vector3(originalCameraRotation.x, originalCameraRotation.y + 90f, originalCameraRotation.z); // Adjust the camera by 90 degrees on Y-axis
-    }
-
     // Start dragging the object
-    private void StartDragging()
+    void StartDragging()
     {
         // Raycast to select the object to drag
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Draggable"))
             {
                 objectToDrag = hit.collider.gameObject;
-                offset = objectToDrag.transform.position - ray.origin;
+                dragDistance = hit.distance; // Store the hit distance for depth
                 isDragging = true;
             }
         }
     }
 
     // Stop dragging the object
-    private void StopDragging()
+    void StopDragging()
     {
         isDragging = false;
         objectToDrag = null; // Clear the reference to the dragged object
     }
 
     // Handle object dragging
-    private void DragObject()
+    void DragObject()
     {
         if (objectToDrag != null)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 worldPos = ray.origin + ray.direction * offset.z; // Adjust for depth
-            objectToDrag.transform.position = worldPos;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Vector3 newPosition = ray.origin + ray.direction * dragDistance;
+            objectToDrag.transform.position = newPosition;
         }
     }
 }
