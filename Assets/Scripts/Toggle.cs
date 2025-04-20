@@ -5,14 +5,17 @@ public class Toggle : MonoBehaviour
     public GameObject targetAsset;
     public KeyCode toggleKey;
     public bool initState;
+    public float distanceFromCamera = 2f;
 
     private SimpleFPSController fpsController;
     private bool wasEnabled;
+    private Camera mainCamera;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         targetAsset.SetActive(initState);
+        mainCamera = Camera.main;
         fpsController = Camera.main.GetComponentInParent<SimpleFPSController>();
         if (fpsController == null)
         {
@@ -45,6 +48,13 @@ public class Toggle : MonoBehaviour
                     Cursor.visible = false;
                 }
             }
+        }
+
+        if (targetAsset.activeSelf)
+        {
+            targetAsset.transform.position = mainCamera.transform.position + 
+                                             mainCamera.transform.forward * distanceFromCamera;
+            targetAsset.transform.rotation = mainCamera.transform.rotation;
         }
     }
 }

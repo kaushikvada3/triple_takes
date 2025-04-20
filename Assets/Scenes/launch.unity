@@ -948,6 +948,7 @@ MonoBehaviour:
   targetAsset: {fileID: 408322991}
   toggleKey: 109
   initState: 1
+  distanceFromCamera: 4
 --- !u!1 &1422139372
 GameObject:
   m_ObjectHideFlags: 0
