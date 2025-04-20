@@ -948,7 +948,7 @@ MonoBehaviour:
   targetAsset: {fileID: 408322991}
   toggleKey: 109
   initState: 1
-  distanceFromCamera: 4
+  distanceFromCamera: 5
 --- !u!1 &1422139372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,8 +1035,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422139372}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000020116568, y: -0.00900057, z: -0.0000030564843, w: 0.9999595}
-  m_LocalPosition: {x: 0.081718095, y: 300.09445, z: -870.3333}
+  m_LocalRotation: {x: -8.529355e-11, y: -0.0000038156286, z: -0.0000000012957461, w: 1}
+  m_LocalPosition: {x: 0.00000012663936, y: 300.21252, z: -871.10284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
