@@ -6,9 +6,7 @@ using System.Collections;
 public class CaptureImage : MonoBehaviour
 {
     public KeyCode captureKey = KeyCode.Tab;
-
-    public GameObject[] menuObjects;
-    
+        
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
