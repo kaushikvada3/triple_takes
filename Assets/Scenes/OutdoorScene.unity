@@ -239,9 +239,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26103894}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalRotation: {x: 0.001500668, y: 0.03239217, z: -0.000048993097, w: 0.99947417}
+  m_LocalPosition: {x: 0, y: 0, z: 64.80245}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1520782726}
@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3}
+  m_AnchoredPosition: {x: 404.48428, y: 56.665222}
   m_SizeDelta: {x: 500, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &145987555
@@ -432,10 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39dbac256be3b45ef84f9cc3472160aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1035962983}
-  directorCamera: {fileID: 1112442318}
-  shotCamera1: {fileID: 0}
-  switchKey: 118
 --- !u!114 &253607285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,9 +1555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad9f4143af554a0ba7597710384a87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  lookSpeed: 2
-  toggleControlKey: 99
 --- !u!114 &1112442316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2494,9 +2487,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521111409}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.003, y: 0.003, z: 0.003}
+  m_LocalRotation: {x: 0.0015007127, y: 0.03239217, z: -0.000048994843, w: 0.99947417}
+  m_LocalPosition: {x: 0, y: 0, z: 64.80118}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 693483157}
@@ -2504,7 +2497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_AnchoredPosition: {x: 404.48422, y: 56.24022}
   m_SizeDelta: {x: 613.5, y: 510}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1575945103
@@ -2579,9 +2572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c01340d474fc4a0d840964e3e187769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  mouseSensitivity: 2
-  gravity: 0
 --- !u!114 &1575945108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,9 +2584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908ac71b21ad8447eb200ba7503d971c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  lookSpeed: 2
-  scrollSpeed: 10
 --- !u!1001 &1802184681
 PrefabInstance:
   m_ObjectHideFlags: 0

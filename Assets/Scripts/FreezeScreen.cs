@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FreezeScreen : MonoBehaviour
 {
-    public KeyCode freezeKey = KeyCode.F; // Key to hold for freezing the screen
+    public KeyCode freezeKey = KeyCode.F;
     private bool isFrozen = false;
     private bool isDragging = false;
     private float dragDistance;
@@ -24,14 +24,12 @@ public class FreezeScreen : MonoBehaviour
 
     void Update()
     {
-        // Check if the freeze key is being pressed down
         if (Input.GetKeyDown(freezeKey))
         {
             isFrozen = true;
             FreezeCharacterMovement();
         }
-        
-        // Check if the freeze key is released
+
         if (Input.GetKeyUp(freezeKey))
         {
             isFrozen = false;
@@ -39,76 +37,50 @@ public class FreezeScreen : MonoBehaviour
             StopDragging();
         }
 
-        // Only handle dragging functionality when the screen is frozen
         if (isFrozen)
         {
-            // Check for initial mouse click to start dragging
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartDragging();
-            }
-            
-            // Continue dragging while mouse button is held
-            if (isDragging && Input.GetMouseButton(0))
-            {
-                DragObject();
-            }
-            
-            // Stop dragging when mouse button is released
-            if (isDragging && Input.GetMouseButtonUp(0))
-            {
-                StopDragging();
-            }
+            if (Input.GetMouseButtonDown(0)) StartDragging();
+            if (isDragging && Input.GetMouseButton(0)) DragObject();
+            if (isDragging && Input.GetMouseButtonUp(0)) StopDragging();
         }
     }
 
-    // Freeze character movement
     void FreezeCharacterMovement()
     {
-        if (fpsController != null)
-        {
-            fpsController.enabled = false; // Disable FPS controller
-        }
-        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true; // Make the cursor visible
+        if (fpsController != null) fpsController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
-    // Unfreeze character movement
     void UnfreezeCharacterMovement()
     {
-        if (fpsController != null)
-        {
-            fpsController.enabled = true; // Enable FPS controller
-        }
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor again
-        Cursor.visible = false; // Hide the cursor
+        if (fpsController != null) fpsController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Start dragging the object
     void StartDragging()
     {
-        // Raycast to select the object to drag
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider != null && hit.collider.gameObject.CompareTag("Draggable"))
+            var draggable = hit.collider.gameObject.GetComponent<Draggable>();
+            if (draggable != null)
             {
                 objectToDrag = hit.collider.gameObject;
-                dragDistance = hit.distance; // Store the hit distance for depth
+                dragDistance = hit.distance;
                 isDragging = true;
             }
         }
     }
 
-    // Stop dragging the object
     void StopDragging()
     {
         isDragging = false;
-        objectToDrag = null; // Clear the reference to the dragged object
+        objectToDrag = null;
     }
 
-    // Handle object dragging
     void DragObject()
     {
         if (objectToDrag != null)
